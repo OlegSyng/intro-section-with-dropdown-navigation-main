@@ -1,0 +1,436 @@
+.navbar {
+    flex-basis: 8rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-almost-white;
+
+
+    &__logo {
+        margin: 0 4rem;
+        transform: translateY(0.5rem);
+    }
+
+    &__checkbox {
+
+        &--input-features,
+        &--input-company {
+            display: none;
+        }
+
+        &--btn-features,
+        &--btn-company {
+            display: flex;
+            align-items: center;
+            color: $color-medium-grey;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            svg {
+                margin: 0 1rem;
+            }
+
+            &:hover,
+            &:hover svg path {
+                color: $color-almost-black;
+                stroke: $color-almost-black;
+            }
+        }
+
+        &--background-features,
+        &--background-company {
+            z-index: 1;
+            height: 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+        }
+
+        &--list {
+            position: absolute;
+            list-style: none;
+            padding: 1rem;
+            background-color: $color-almost-white;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.2rem 1rem rgba(black, 0.3);
+
+            opacity: 0;
+            width: 0;
+
+            &-features {
+                top: 5rem;
+                left: -5rem;
+            }
+
+            &-company {
+                top: 5rem;
+                left: 5rem;
+            }
+
+
+            &-item {
+               margin-bottom: 1.5rem;
+               width: max-content;
+               
+               &:last-child {
+                margin-bottom: 2.5rem;
+               }
+            }
+
+            &-link {
+                &:link,
+                &:visited {
+                    display: inline-block;
+                    text-decoration: none;
+                    color: $color-medium-grey;
+                    font-size: 1.5rem;
+                    position: relative;
+                    transition: color .2s;
+
+                    span {
+                        margin-right: 1.5rem;
+                        svg {
+                            width: 2rem;
+                            transform: translateY(0.3rem);
+                        }
+                    }
+                }
+                &:hover,
+                &:active {
+                    color: $color-almost-black;
+                }
+            }
+        }
+    }
+
+    &__btn {
+
+        &,
+        &:link,
+        &:visited {
+            color: $color-medium-grey;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color .2s;
+            border: none;
+            font-size: $default-font-size;
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 500;
+        }
+        
+        &:hover {
+            color: $color-almost-black;
+        }
+
+        &--login,
+        &--register {
+            padding: 1.3rem 3rem;
+            margin: 0 1rem;
+            background-color: $color-almost-white;
+        }
+
+        &--register {
+            border: 2px solid currentColor;
+            border-radius: 1.7rem;
+        }
+    }
+
+    &__links {
+        margin-right: auto;
+
+        display: flex;
+        align-items: center;
+
+        & > * {
+            margin: 0 2rem;
+        }
+
+        &-features,
+        &-company {
+            position: relative;
+        }
+
+        @include respond(bp-split) {
+            display: none;
+        }
+    }
+
+    &__login {
+        margin-right: 3rem;
+
+        @include respond(bp-split) {
+            display: none;
+        }
+    }
+
+    &__toggle {
+        display: none;
+
+        @include respond(bp-split) {
+            display: block;
+        }
+
+        &--input {display: none;}
+
+        &--label {
+            position: relative;
+            z-index: 10;
+            height: 4rem;
+            width: 4rem;
+            margin: 0 4rem;
+            background-color: $color-almost-white;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+
+            span {
+                position: relative;
+                &,
+                &::before,
+                &::after {
+                    width: 3.5rem;
+                    height: 2px;
+                    background-color: $color-almost-black;
+                    display: inline-block;
+            }
+                &::before,
+                &::after {
+                    content:"";
+                    position: absolute;
+                    left:0;
+                    transition: all 0.2s;
+                }
+                &::before { top: -1rem; }
+                &::after { top: 1rem; }
+            }
+        }
+    }
+
+
+    // FUNCTIONALITY
+    &__checkbox--input-features:checked ~ &__checkbox--background-features {
+        z-index: 15;
+        height: 100vh;
+    }
+    &__checkbox--input-features:checked ~ &__checkbox--list-features {
+        z-index: 20;
+        opacity: 1;
+        width: max-content;
+    }
+    &__checkbox--input-features:checked ~ &__checkbox--btn-features {
+        svg {
+           path {
+            d: path("m1 5 4-4 4 4");
+           }
+        }   
+    }
+
+    &__checkbox--input-company:checked ~ &__checkbox--background-company {
+        z-index: 15;
+        height: 100vh;
+    }
+    &__checkbox--input-company:checked ~ &__checkbox--list-company {
+        z-index: 20;
+        opacity: 1;
+        width: max-content;
+    }
+    &__checkbox--input-company:checked ~ &__checkbox--btn-company {
+        svg {
+           path {
+            d: path("m1 5 4-4 4 4");
+           }
+        }   
+    }
+
+    &__toggle--input:checked + &__toggle--label span {
+        background-color: transparent;
+    }
+    &__toggle--input:checked + &__toggle--label span::before {
+        top: 0;
+        transform: rotate(135deg);
+    }
+    &__toggle--input:checked + &__toggle--label span::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }
+}
+
+.sider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    height: 100%;
+    width: var(--sider-open);
+    display: flex;
+    overflow: hidden;
+
+
+    &-background {
+        z-index: 8;
+        width: 35%;
+        background-color: rgba($color-almost-black, 0.3);
+
+    }
+
+    &__links {
+        z-index: 9;
+        width: 65%;
+        background-color: $color-almost-white;
+        display: flex;
+        flex-direction: column;
+
+        &-features {
+            margin-top: 8rem;
+        }
+        &-careers,
+        &-about {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+    }
+
+    &__btn {
+        &,
+        &:link,
+        &:visited {
+            color: $color-medium-grey;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        &:hover {
+            color: $color-almost-black;
+        }
+    }
+
+    &__checkbox {
+
+        &--input-features,
+        &--input-company {
+            display: none;
+        }
+
+        &--btn-features,
+        &--btn-company {
+            margin: 1rem 0 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            color: $color-medium-grey;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            svg {
+                margin: 0 1rem;
+            }
+
+        &:hover,
+        &:hover svg path {
+            color: $color-almost-black;
+            stroke: $color-almost-black;
+            }
+        }
+
+        &--list {
+            list-style: none;
+            background-color: $color-almost-white;
+            display: flex;
+            flex-direction: column;
+
+            opacity: 0;
+            height: 0;
+
+            &-item {
+                margin: 1rem auto 1rem 30%;
+                width: max-content;
+                display: none;
+            }
+
+            &-link {
+                &:link,
+                &:visited {
+                    display: inline-block;
+                    text-decoration: none;
+                    color: $color-medium-grey;
+                    font-size: 1.5rem;
+                    position: relative;
+                    transition: color .2s;
+
+                    span {
+                        margin-right: 1.5rem;
+                        svg {
+                            width: 2rem;
+                            transform: translateY(0.3rem);
+                        }
+                    }
+                }
+                &:hover,
+                &:active {
+                    color: $color-almost-black;
+                }
+            }
+        }
+    }
+
+    &__login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &--login,
+        &--register {
+            display: inline-block;
+            width: 90%;
+            font-size: $default-font-size;
+            border: none;
+            padding: 1.3rem 0;
+            margin: 0 1rem;
+            background-color: $color-almost-white;
+        }
+
+        &--register {
+            border: 2px solid currentColor;
+            border-radius: 1.7rem;
+        }
+    }
+
+    // FUNCTIONALITY
+    &__checkbox--input-features:checked ~ &__checkbox--list-features {
+        opacity: 1;
+        height: 100%;
+        padding: 2rem 0;
+
+        & > * {
+            display: inline-block;
+        }
+    }
+    &__checkbox--input-features:checked ~ &__checkbox--btn-features {
+        svg {
+           path {
+            d: path("m1 5 4-4 4 4");
+           }
+        }   
+    }
+    &__checkbox--input-company:checked ~ &__checkbox--list-company {
+        opacity: 1;
+        height: 100%;
+        padding: 2rem 0;
+
+        & > * {
+            display: inline-block;
+        }
+
+    }
+    &__checkbox--input-company:checked ~ &__checkbox--btn-company {
+        svg {
+           path {
+            d: path("m1 5 4-4 4 4");
+           }
+        }   
+    }
+}

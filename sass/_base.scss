@@ -1,0 +1,63 @@
+// COLOR PALLET
+$color-almost-white: #fafafa;
+$color-medium-grey: #696969;
+$color-almost-black: #141414;
+
+
+// DEFAULT FONT SIZE
+$default-font-size: 1.8rem;
+
+
+
+
+// The designs were created to the following widths:
+// 1em = 16px
+// bp-desktop: >87.5em;     1400px
+// bp-tablet: <87.49999em;  1399px
+// bp-split: <62.5em:       1000px
+// bp-modile: 50em;         800px
+// bp-phone: 31.25em;       500px
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == bp-phone {
+        @media only screen and (max-width: 31.25em) {@content};
+    }
+    @if $breakpoint == bp-mobile {
+        @media only screen and (max-width: 50em) {@content};
+    }
+    @if $breakpoint == bp-split {
+        @media only screen and (max-width: 62.5em) {@content};
+    }
+    @if $breakpoint == bp-tablet {
+        @media only screen and (max-width: 87.49999em) {@content};
+    }
+    @if $breakpoint == bp-desktop {
+        @media only screen and (min-width: 87.5em) {@content};
+    }
+}
+
+:root {
+    --sider-open: 0;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; //1 rem = 16px we need to set it to 10px for easy calculations: 1000/16 = 62.5%
+}
+
+body {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
